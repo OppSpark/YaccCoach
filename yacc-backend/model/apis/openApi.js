@@ -37,6 +37,8 @@ router.get("/drugInfo", (req, res) => {
       }
     )
     .then((response) => {
+      // console.log("API 요청 성공:", response.data);
+      console.log("API 요청 성공:", response.data);
       res.json(response.data);
     })
     .catch((error) => {
