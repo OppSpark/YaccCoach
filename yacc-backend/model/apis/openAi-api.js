@@ -27,6 +27,8 @@ router.post("/openAi", (req, res) => {
     })
     .then(completion => {
         const result = JSON.parse(completion.choices[0].message.content);
+        //console.log("OpenAI API 결과:", result);
+        console.log("OpenAI API 결과:", result);
         res.json(result);
     })
     .catch(error => {
