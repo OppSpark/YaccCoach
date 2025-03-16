@@ -14,5 +14,9 @@
 OPENAI_API_KEY="OpenAI API 키를 입력"
 OPENAPI_API_KEY="OpenAPI 키를 입력"
 ```
-3. requirements.txt 에 있는 npm 을 설치합니다.
-4. 터미널에 node index를 명령하여 웹서버를 실행시킵니다.
+2. requirements.txt 에 있는 npm 을 설치합니다.
+- https://github.com/OppSpark/YaccCoach/blob/main/requirements.txt
+3. 터미널에 아래 명령어를 입력하여 웹서버를 실행시킵니다.
+```
+node index
+```
