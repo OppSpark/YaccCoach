@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/drugInfo", (req, res) => {
+  const apiUrl = "http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList";
+
   const {
     pageNo = "1",
     numOfRows = "5",
@@ -21,7 +23,7 @@ router.get("/drugInfo", (req, res) => {
 
   axios
     .get(
-      "http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList",
+      apiUrl,
       {
         params: {
           serviceKey: serviceKey,
