@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { fetchDrugData } from './service/drugService';
+import './App.css'
+import { fetchDrugData } from '../../service/drugService';
+
 
 function DrugInfoApp() {
   const [drugData, setDrugData] = useState(null);
