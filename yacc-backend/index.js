@@ -33,12 +33,15 @@ const openAI = require("./model/apis/openAi-api.js");
 app.use("/", openAI);
 
 //login
-//const login = require('./model/apis/login.js');
-//app.use('/', login);
+const login = require('./model/auth/login.js');
+app.use('/', login);
 
 //register
 const register = require('./model/auth/register.js');
 app.use('/', register);
+
+
+
 
 app.set("port", process.env.PORT || 3330);
 
