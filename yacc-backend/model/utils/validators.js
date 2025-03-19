@@ -11,6 +11,7 @@ exports.isValidTel = (tel) => /^010\d{8}$/.test(tel);
 exports.isValidAddress = (address) => address.length <= 100;
 
 // 개인정보 동의 검증 (Y/N만 허용)
-exports.isValidAgreed = (agreed) => ["Y", "N"].includes(agreed);
+//exports.isValidAgreed = (agreed) => ["Y", "N"].includes(agreed);
+exports.isValidAgreed = (agreed) => [1, 0].includes(agreed)
 
 
