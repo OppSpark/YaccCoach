@@ -15,7 +15,7 @@ const {
     isValidTel,
     isValidAddress,
     isValidAgreed,
-} = require("../utils/validators"); // 추가된 import
+} = require("../utils/validators");
 
 // 회원가입 API
 router.post("/signUp", (req, res) => {
