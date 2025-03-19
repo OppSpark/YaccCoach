@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './App.css';
+import { fetchDrugData } from './service/drugService';
+
 function DrugInfoApp() {
   const [drugData, setDrugData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -9,13 +10,10 @@ function DrugInfoApp() {
     try {
       setLoading(true);
       setError(null);
-
-      const response = await fetch('http://100.92.18.19:3330/drugInfo?itemName=%EC%BD%9C%EB%8C%80%EC%9B%90&type=json');
-
-      if (!response.ok) throw new Error('API 요청 실패');
       
-      const data = await response.json();
-      setDrugData(data.body.items);
+      const result = await fetchDrugData('콜대원');
+      setDrugData(result);
+      
     } catch (err) {
       setError(err.message);
     } finally {
@@ -24,21 +22,31 @@ function DrugInfoApp() {
   };
 
   return (
-    <div>
-      <button onClick={handleFetchData} disabled={loading}>
-        {loading ? '불러오는 중...' : '의약품 정보 조회'}
+    <div className="drug-info-container">
+      <button 
+        onClick={handleFetchData} 
+        disabled={loading}
+        className="fetch-button"
+      >
+        {loading ? '데이터 로드 중...' : '의약품 정보 가져오기'}
       </button>
 
-      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-
-      {loading && <p>불러오는 중...</p>}
-
-      {drugData && drugData.map((item, index) => (
-        <div key={index}>
-          <h2>{item.itemName}</h2>
-          <p>{item.efcyQesitm}</p>
+      {error && (
+        <div className="error-message">
+          ⚠️ 오류 발생: {error}
         </div>
-      ))}
+      )}
+
+      {drugData && (
+        <div className="drug-list">
+          {drugData.map((item, index) => (
+            <div key={index} className="drug-item">
+              <h2 className="drug-name">{item.itemName}</h2>
+              <p className="drug-effect">{item.efcyQesitm}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
