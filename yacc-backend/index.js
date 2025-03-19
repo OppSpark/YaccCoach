@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const db = require('./model/database/databaseInfo.js');
+const dbs = require('./model/database/databaseInfo.js');
 
 //const bodyParser = require("body-parser");
 //const cookieParser = require("cookie-parser");
@@ -37,8 +37,8 @@ app.use("/", openAI);
 //app.use('/', login);
 
 //register
-//const register = require('./model/apis/register.js');
-//app.use('/', register);
+const register = require('./model/auth/register.js');
+app.use('/', register);
 
 app.set("port", process.env.PORT || 3330);
 
@@ -48,7 +48,7 @@ app.listen(app.get("port"), () => {
 
 //디비 연결 테스트
 app.get('/dbtest', (req, res) => {
-    db.query('SELECT * FROM user', function (err, results, fields) {
+    dbs.query('SELECT * FROM user', function (err, results, fields) {
         if (err) throw err;
         res.send(results);
     });
