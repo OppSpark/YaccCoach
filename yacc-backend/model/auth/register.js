@@ -2,8 +2,6 @@
 메모 알아볼것들
 express-validator 라이브러리를 사용하면 입력 값의 유효성을 검사 가능함
 bcrypt 라이브러리를 사용하면 비밀번호를 해싱 관련 찾아볼것
-
-mysql 연동 필요 디비 설계하고 할듯
 */
 const express = require("express");
 const router = express.Router();
@@ -20,8 +18,6 @@ const {
 // 회원가입 API
 router.post("/signUp", (req, res) => {
     const { username, email, password, tel_number, address, agreed_personal } = req.body;
-    
-    console.log(req.body);
 
     if (
         !username ||
