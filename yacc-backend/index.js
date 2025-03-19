@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const dbs = require('./model/database/databaseInfo.js');
+const mysqlDB = require('./model/database/databaseInfo.js');
 
 //const bodyParser = require("body-parser");
 //const cookieParser = require("cookie-parser");
@@ -48,7 +48,7 @@ app.listen(app.get("port"), () => {
 
 //디비 연결 테스트
 app.get('/dbtest', (req, res) => {
-    dbs.query('SELECT * FROM user', function (err, results, fields) {
+    mysqlDB.query('SELECT * FROM user', function (err, results, fields) {
         if (err) throw err;
         res.send(results);
     });
