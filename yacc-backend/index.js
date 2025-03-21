@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const session = require("express-session");
 const app = express();
 const mysqlDB = require('./model/database/databaseInfo.js');
 
@@ -18,7 +19,21 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
     })
+    
 );
+
+app.use(
+    session({
+        secret: "test123",
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            httpOnly : true,
+            secure : false,
+            maxAge: 1000 * 60 * 60 * 24,
+        }
+    })
+)
 
 app.get("/", (req, res) => {
     res.send("Welcome to YaccCoach API");
