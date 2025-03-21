@@ -8,3 +8,4 @@ npm install cors
 npm install mysql
 npm install express-validator
 npm install bcrypt
+npm install express-session
