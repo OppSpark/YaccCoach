@@ -4,10 +4,6 @@ const session = require("express-session");
 const app = express();
 const mysqlDB = require('./model/database/databaseInfo.js');
 
-//const bodyParser = require("body-parser");
-//const cookieParser = require("cookie-parser");
-//const session = require("express-session");
-
 require("dotenv").config();
 
 app.use(express.json());
@@ -64,11 +60,3 @@ app.set("port", process.env.PORT || 3330);
 app.listen(app.get("port"), () => {
     console.log(app.get("port"), "Listen to 3300 port");
 });
-
-//디비 연결 테스트
-app.get('/dbtest', (req, res) => {
-    mysqlDB.query('SELECT * FROM user', function (err, results, fields) {
-        if (err) throw err;
-        res.send(results);
-    });
-})
