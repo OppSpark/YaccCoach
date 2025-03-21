@@ -10,5 +10,3 @@ root.render(
     <DrugInfoApp />
   </React.StrictMode>
 );
-
-
