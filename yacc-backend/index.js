@@ -28,10 +28,11 @@ app.use(
         resave: false,
         saveUninitialized: true,
         cookie: {
-            httpOnly : true,
+            httpOnly : true, // https 환경에서만 session 정보를 주고받도록처리
             secure : false,
             maxAge: 1000 * 60 * 60 * 24,
-        }
+        },
+        name: 'session-cookie'
     })
 )
 
