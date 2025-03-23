@@ -51,24 +51,10 @@ app.get('/', (req, res) => {
   res.send('Welcome to YaccCoach API');
 });
 
-// 제약 정보 /drugInfo
-const drugInfo = require("./model/apis/openApi.js");
-app.use("/", drugInfo);
+const routes = require("./model/routes/routes.js");
+app.use("/", routes);
 
-// openAI api /openAi
-const openAI = require("./model/apis/openAi-api.js");
-app.use("/", openAI);
 
-// 로그인 / signUp
-const login = require('./model/auth/login.js');
-app.use('/', login);
-
-// 회원가입 /signUp
-const register = require('./model/auth/register.js');
-app.use('/', register);
-
-const logout = require('./model/auth/logout.js');
-app.use('/', register);
 // ----------------------------------------
 // 4) 서버 실행
 // ----------------------------------------
