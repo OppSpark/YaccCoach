@@ -1,6 +1,3 @@
-/**
- * index.js (서버 엔트리)
- */
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -9,7 +6,6 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 
 // DB 연결(pool) 불러오기
-//  → 예: databaseInfo.js 에서 createPool() 후 module.exports = pool;
 const conn = require('./model/database/databaseInfo.js'); 
 
 const app = express();
@@ -41,7 +37,7 @@ app.use(
     store: sessionStore,
     cookie: {
       httpOnly: true,
-      // sameSite: 'none', // subdomain 간 쿠키를 쓰려면 'none' 이어야 함.
+      sameSite: 'none', // subdomain 간 쿠키를 쓰려면 'none' 이어야 함.
       // secure: true,     // HTTPS 환경이면 true 권장
       maxAge: 1000 * 60 * 60, // 1시간
     },
@@ -55,26 +51,28 @@ app.get('/', (req, res) => {
   res.send('Welcome to YaccCoach API');
 });
 
-// 예: drugInfo
+// 제약 정보 /drugInfo
 const drugInfo = require("./model/apis/openApi.js");
 app.use("/", drugInfo);
 
-// 예: openAI api
+// openAI api /openAi
 const openAI = require("./model/apis/openAi-api.js");
 app.use("/", openAI);
 
-// 예: 로그인 / 로그아웃 라우트
+// 로그인 / signUp
 const login = require('./model/auth/login.js');
 app.use('/', login);
 
-// 예: 회원가입
+// 회원가입 /signUp
 const register = require('./model/auth/register.js');
 app.use('/', register);
 
+const logout = require('./model/auth/logout.js');
+app.use('/', register);
 // ----------------------------------------
 // 4) 서버 실행
 // ----------------------------------------
 const PORT = process.env.PORT || 3330;
 app.listen(PORT, () => {
-  console.log(`${PORT} 포트에서 서버가 동작 중입니다.`);
+  console.log(`${PORT} 포트에서 서버가 동작`);
 });
