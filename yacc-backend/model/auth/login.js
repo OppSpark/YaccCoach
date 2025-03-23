@@ -1,70 +1,67 @@
+// model/auth/login.js
 const express = require("express");
 const router = express.Router();
-const mysqlDB = require("../database/databaseInfo.js");
-const security = require("../utils/passHashSecurity.js");
+const dbPool = require("../database/databaseInfo.js");
+const passHashSecurity = require("../utils/passHashSecurity.js");
 
-router.post("/signIn", (req, res) => {
-    //const { username, password } = req.body;
-    const { email, password } = req.body;
+router.post("/login", async (req, res) => {
+    try {
+        const { email, password } = req.body;
 
-    if (!email || !password) {
-        return res.status(400).json({ result: "bad_null_error" });  // ID 또는 PW 가 안들어옴
-    }
-
-    const signUpCheckUserSQL =
-        "SELECT username, password FROM user WHERE email = ?";
-
-    mysqlDB.query(signUpCheckUserSQL, email, async (err, users) => {
-        if (err) {
-            console.error("데이터베이스 쿼리 오류:", err);
-            return res.status(500).json({ result: "db_query_error" });  // 데이터베이스 에러
+        // 필수 값 체크
+        if (!email || !password) {
+            return res
+                .status(400)
+                .json({ message: "이메일과 비밀번호를 입력하세요." });
         }
 
-        // email 조회 했는데 없는 경우
-        if (users.length === 0) {
-            return res.status(401).json({ result: "AUTH_FAILED" });  // 계정이 없음
+        // ★ pool.promise()를 사용해 Promise 기반 메서드로 전환
+        const promisePool = dbPool.promise();
+
+        // 이메일로 사용자 찾기
+        const [rows] = await promisePool.query(
+            "SELECT * FROM user WHERE email = ?",
+            [email]
+        );
+
+        // 이메일 존재 여부 체크
+        if (rows.length === 0) {
+            return res
+                .status(400)
+                .json({ message: "등록되지 않은 이메일입니다." });
         }
 
-        const user = users[0];
+        const user = rows[0];
 
-        console.log(password)
-
-        // password 복호화
-        const hashPassword = await security.hashPassword(password)
-
-        const isValid = await security.comparePassword(password, hashPassword);
-
-
-        //아 시발 고쳤다
-        //console.log(isValid + "     2211111111111");
-        console.log(isValid)
-
-        if (!isValid) {
-            return res.json({ result: "su" });
-        } else {
-            return res.json({ result: "ssss" });
+        // pepper + bcrypt 비교
+        const isMatch = await passHashSecurity.comparePassword(
+            password,
+            user.password
+        );
+        if (!isMatch) {
+            return res
+                .status(400)
+                .json({ message: "비밀번호가 일치하지 않습니다." });
         }
-    });
 
-    //const signInSQL = 'SELECT * FROM user WHERE email = ? AND password = ?';
+        // 세션 저장 (express-session 사용 중이라고 가정)
+        req.session.userId = user.user_id;
+        req.session.username = user.username;
+        req.session.email = user.email;
 
-    //테스트 용도
-    /*
-    {
-        "email": "email",
-        "password": "password"
+        // 성공 응답
+        return res.status(200).json({
+            message: "로그인 성공",
+            user: {
+                user_id: user.user_id,
+                username: user.username,
+                email: user.email,
+            },
+        });
+    } catch (error) {
+        console.error("로그인 오류:", error);
+        return res.status(500).json({ message: "서버 오류" });
     }
-    */
-
-    /*
-    if (email === "email" && password === "password") {
-        req.session.loggedIn = true;
-        res.send("로그인 성공");
-    } else {
-        res.send("로그인 실패");
-        req.session.id = "hello";
-    }
-    */
 });
 
 module.exports = router;
