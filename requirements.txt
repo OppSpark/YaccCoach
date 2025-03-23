@@ -5,7 +5,15 @@ npm install openai
 npm install dotenv
 npm install body-parser
 npm install cors
-npm install mysql
+npm install mysql2
 npm install express-validator
 npm install bcrypt
 npm install express-session
+npm install express-mysql-session
+npm install cookie-parser
+npm install helmet
+npm install csurf
+
+
+frontend
+npm install axios
