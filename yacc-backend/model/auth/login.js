@@ -4,7 +4,7 @@ const router = express.Router();
 const dbPool = require("../database/databaseInfo.js");
 const passHashSecurity = require("../utils/passHashSecurity.js");
 
-router.post("/login", async (req, res) => {
+router.post("/signUp", async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -15,7 +15,6 @@ router.post("/login", async (req, res) => {
                 .json({ message: "이메일과 비밀번호를 입력하세요." });
         }
 
-        // ★ pool.promise()를 사용해 Promise 기반 메서드로 전환
         const promisePool = dbPool.promise();
 
         // 이메일로 사용자 찾기
@@ -44,7 +43,6 @@ router.post("/login", async (req, res) => {
                 .json({ message: "비밀번호가 일치하지 않습니다." });
         }
 
-        // 세션 저장 (express-session 사용 중이라고 가정)
         req.session.userId = user.user_id;
         req.session.username = user.username;
         req.session.email = user.email;
