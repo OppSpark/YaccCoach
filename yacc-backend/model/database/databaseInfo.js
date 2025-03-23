@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 require('dotenv').config();
 
 const conn = mysql.createPool({
@@ -6,7 +6,8 @@ const conn = mysql.createPool({
     port: process.env.DB_PORT,
     user: process.env.DB_USER,
     password: process.env.DB_PW,
-    database: process.env.DB_NAME
+    database: process.env.DB_NAME,
+    connectionLimit: 10, // 원하는 풀 크기로 조정
 });
 
 // 연결 상태 확인을 위한 테스트 쿼리 실행

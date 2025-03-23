@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mysqlDB = require('../database/databaseInfo.js');
-const security = require('../utils/security'); // security.js 임포트
+const security = require('../utils/passHashSecurity.js');
 
 const {
     isValidEmail,
@@ -9,7 +9,7 @@ const {
     isValidTel,
     isValidAddress,
     isValidAgreed,
-} = require("../utils/validators");
+} = require("./signUpValidators.js");
 
 // 회원가입 API
 router.post("/signUp", async (req, res) => {
