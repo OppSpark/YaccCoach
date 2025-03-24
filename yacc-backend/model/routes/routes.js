@@ -21,9 +21,20 @@ router.use("/", register);
 const logout = require("../auth/logout.js");
 router.use("/", logout);
 
-// 질병 정보 /disease
+// 질병 정보 GET /disease 
 const disease_get = require("../disease/disease_get.js");
 router.use("/", disease_get);
 
+// 질병 정보 POST /disease
+const disease_post = require("../disease/disease_post.js");
+router.use("/", disease_post);
+
+//질병 정보 PUT /disease
+const disease_put = require("../disease/disease_put.js");
+router.use("/", disease_put);
+
+//질병 정보 DELETE /disease
+const disease_delete = require("../disease/disease_delete.js");
+router.use("/", disease_delete);
 
 module.exports = router;
