@@ -37,4 +37,20 @@ router.use("/", disease_put);
 const disease_delete = require("../disease/disease_delete.js");
 router.use("/", disease_delete);
 
+// 선호 회사 정보 GET /preference
+const preference_get = require("../preference/preference_get.js");
+router.use("/", preference_get);
+
+// 선호 회사 정보 POST /preference
+const preference_post = require("../preference/preference_post.js");
+router.use("/", preference_post);
+
+// 선호 회사 정보 PUT /preference
+const preference_put = require("../preference/preference_put.js");
+router.use("/", preference_put);
+
+// 선호 회사 정보 DELETE /preference
+const preference_delete = require("../preference/preference_delete.js");
+router.use("/", preference_delete);
+
 module.exports = router;
