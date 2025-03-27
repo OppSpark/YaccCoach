@@ -53,4 +53,9 @@ router.use("/", preference_put);
 const preference_delete = require("../preference/preference_delete.js");
 router.use("/", preference_delete);
 
+// 최종 API /search
+const search = require("../apis/search-api.js");
+router.use("/", search);
+
+
 module.exports = router;
