@@ -3,12 +3,7 @@ const router = express.Router();
 
 const mysqlDB = require("../database/databaseInfo.js");
 const security = require("../utils/passHashSecurity.js");
-
-const {
-    isValidEmail,
-    isValidPassword,
-    // 필요한 validator가 있으면 import
-} = require("./signUpValidators.js");
+const { isValidEmail } = require("./signUpValidators.js");
 
 // 로그인 API
 router.post("/login", async (req, res) => {
@@ -16,22 +11,21 @@ router.post("/login", async (req, res) => {
 
     // 필수 값 체크
     if (!email || !password) {
-        return res.send({
+        return res.status(400).json({ // 명확한 상태 코드
             result: "login_fail",
             message: "Email and password are required",
         });
     }
 
-    // 유효성 검사 (선택적으로 적용)
+    // 유효성 검사
     if (!isValidEmail(email)) {
-        return res.send({
+        return res.status(400).json({
             result: "UnMatchData",
             message: "Invalid email format",
         });
     }
 
     try {
-        // DB에서 해당 email의 사용자 조회
         const sql = "SELECT * FROM user WHERE email = ?";
         const rows = await new Promise((resolve, reject) => {
             mysqlDB.query(sql, [email], (err, results) => {
@@ -40,9 +34,8 @@ router.post("/login", async (req, res) => {
             });
         });
 
-        // 이메일 존재 여부 체크
         if (rows.length === 0) {
-            return res.send({
+            return res.status(404).json({ // 404 상태코드 명확히 설정
                 result: "login_fail",
                 message: "Email not found",
             });
@@ -50,10 +43,9 @@ router.post("/login", async (req, res) => {
 
         const user = rows[0];
 
-        // 비밀번호 비교 (pepper + bcrypt)
         const isMatch = await security.comparePassword(password, user.password);
         if (!isMatch) {
-            return res.send({
+            return res.status(401).json({ // 401 Unauthorized 상태 코드
                 result: "login_fail",
                 message: "Incorrect password",
             });
@@ -64,17 +56,29 @@ router.post("/login", async (req, res) => {
         req.session.username = user.username;
         req.session.email = user.email;
 
-        // 로그인 성공
-        return res.send({
-            result: "login_success",
-            user: {
-                user_id: user.user_id,
-                username: user.username,
-                email: user.email,
-            },
+        // 세션 저장 후 명시적으로 save
+        req.session.save((err) => {
+            if (err) {
+                console.error("Session save error:", err);
+                return res.status(500).json({ result: "login_fail", message: "Session error" });
+            }
+
+            res.cookie
+
+            // 로그인 성공 응답 전송 (상태 코드 명확히)
+            return res.status(200).json({
+                result: "login_success",
+                name: user.username,
+                user: {
+                    user_id: user.user_id,
+                    username: user.username,
+                    email: user.email,
+                },
+            });
         });
+
     } catch (err) {
-        // DB나 기타 처리 중 오류
+        console.error("Login error:", err);
         const errorMap = {
             ER_DUP_ENTRY: { result: "already_exist" },
             ER_DATA_TOO_LONG: { result: "data_too_long" },
@@ -83,7 +87,7 @@ router.post("/login", async (req, res) => {
             ER_BAD_NULL_ERROR: { result: "bad_null_error" },
         };
 
-        return res.send(
+        return res.status(500).json(
             errorMap[err.code] || {
                 result: "login_fail",
                 message: err.message,
