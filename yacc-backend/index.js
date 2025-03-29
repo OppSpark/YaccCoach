@@ -20,29 +20,36 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: 'http://dev.yacccoach.oppspark.net', 
+    origin: true ,
     credentials: true, // 쿠키/세션 허용
+    methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'], // 허용할 HTTP 메서드
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept' ], // 허용할 헤더
   })
 );
+app.options('*', cors());
+// app.use(cors()); // 모든 도메인 허용
+
+// OPTIONS preflight 대응 추가 설정
 
 // ----------------------------------------
 // 2) 세션 설정
 // ----------------------------------------
 const sessionStore = new MySQLStore({}, conn);
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || 'my-secret-key',
-    resave: false,
-    saveUninitialized: false,
-    store: sessionStore,
-    cookie: {
-      httpOnly: true,
-      sameSite: 'none', // subdomain 간 쿠키를 쓰려면 'none' 이어야 함.
-      // secure: true,     // HTTPS 환경이면 true 권장
-      maxAge: 1000 * 60 * 60, // 1시간
-    },
-  })
-);
+// 개발환경(HTTP)의 정확한 세션 설정 (반드시 이렇게!)
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  store: sessionStore,
+  cookie: {
+    httpOnly: true,
+    secure: false,      // HTTP 환경에서는 반드시 false
+    sameSite: 'lax',    // 반드시 lax로 설정
+    domain: 'yacccoach.oppspark.net', // 도메인 설정
+    maxAge: 1000 * 60 * 60 * 72, // 3일
+  },
+}));
 
 // ----------------------------------------
 // 3) 라우트들
