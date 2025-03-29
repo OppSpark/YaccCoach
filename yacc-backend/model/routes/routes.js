@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+// 회원가입 /verifyUser
+const verifyUser = require("../auth/loginVerify.js");
+router.use("/", verifyUser);
+
 // 제약 정보 /drugInfo
 const drugInfo = require("../apis/openApi.js");
 router.use("/", drugInfo);
