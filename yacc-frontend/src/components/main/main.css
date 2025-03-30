@@ -1,0 +1,57 @@
+/* 전체 레이아웃 */
+.main-container {
+  padding: 15px;
+  max-width: 480px;
+  margin: 0 auto;
+  background-color: #f0f4f8;
+  font-family: 'Apple SD Gothic Neo', sans-serif;
+}
+
+/* 카드 박스 */
+.main-card {
+  background-color: #ffffff;
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+/* 타이틀 */
+.main-card h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+/* 설명 */
+.main-card p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+/* 버튼 묶음 */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* 버튼 스타일 */
+.main-button {
+  display: block;
+  padding: 0.9rem 1rem;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: background-color 0.25s ease;
+  text-align: center;
+}
+
+.main-button:hover {
+  background-color: #0056b3;
+}
