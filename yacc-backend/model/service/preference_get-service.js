@@ -1,27 +1,27 @@
 const mysqlDB = require("../database/databaseInfo.js");
 
 const getUserPreference = (user_id, pageNo = 1, limit = 5) => {
-    const offset = (pageNo - 1) * limit;
-
-    const preferenceSQL = `
-        SELECT * FROM user_preference
-        WHERE user_id = ?
-        ORDER BY user_id DESC
-        LIMIT ? OFFSET ?;
-    `;
-
     return new Promise((resolve, reject) => {
-        mysqlDB.query(preferenceSQL, [user_id, limit, offset], (err, result) => {
+        if (!user_id || isNaN(pageNo) || pageNo < 1) {
+            return resolve([]); // 빈 배열로 리턴하면 프론트에서 .map() 에러 안 남
+        }
+
+        const offset = (pageNo - 1) * limit;
+
+        const sql = `
+            SELECT * FROM user_preference
+            WHERE user_id = ?
+            ORDER BY user_id DESC
+            LIMIT ? OFFSET ?;
+        `;
+
+        mysqlDB.query(sql, [user_id, limit, offset], (err, result) => {
             if (err) {
-                console.error("Database query error:", err);
-                return reject(err);
+                console.error("DB 오류:", err);
+                return resolve([]); // 오류 발생 시에도 빈 배열 반환
             }
 
-            if (result.length === 0) {
-                return resolve(null);
-            }
-
-            resolve(result);
+            return resolve(result);
         });
     });
 };
