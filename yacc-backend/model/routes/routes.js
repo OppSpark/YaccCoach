@@ -61,5 +61,16 @@ router.use("/", preference_delete);
 const search = require("../apis/search-api.js");
 router.use("/", search);
 
+// 사용자 정보 GET /user
+const user_get = require("../users/user_get.js");
+router.use("/", user_get);
+
+// 사용자 정보 PUT /user
+const user_put = require("../users/user_put.js");
+router.use("/", user_put);
+
+// 사용자 비밀번호 변경 PUT /changePassword
+const user_changePassword = require("../auth/userChangePassword");
+router.use("/", user_changePassword);
 
 module.exports = router;

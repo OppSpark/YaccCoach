@@ -3,7 +3,7 @@ const router = express.Router();
 const { getMedicineRecommendations } = require("../service/openAi-api-service");
 const { getUserPreference } = require("../service/preference_get-service");
 const { getDisease } = require("../service/disease_get-service");
-const { isLoggedIn } = require("../service/authMiddleWare");
+const { isLoggedIn } = require("../middleware/authMiddleWare");
 
 router.post("/search", isLoggedIn, async (req, res) => {
     const { symptom } = req.body;
