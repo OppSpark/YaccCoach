@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+// 회원가입 /verifyUser
+const verifyUser = require("../auth/loginVerify.js");
+router.use("/", verifyUser);
+
 // 제약 정보 /drugInfo
 const drugInfo = require("../apis/openApi.js");
 router.use("/", drugInfo);
@@ -52,5 +56,10 @@ router.use("/", preference_put);
 // 선호 회사 정보 DELETE /preference
 const preference_delete = require("../preference/preference_delete.js");
 router.use("/", preference_delete);
+
+// 최종 API /search
+const search = require("../apis/search-api.js");
+router.use("/", search);
+
 
 module.exports = router;

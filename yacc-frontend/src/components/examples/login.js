@@ -1,24 +1,39 @@
 // src/Login.js
 import React, { useState } from 'react';
-import axios from '../../config/axiosConfig';  // 위에서 만든 axios 설정
+import { useNavigate } from 'react-router-dom';
+import axios from '../../config/axiosConfig';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
+  
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // POST /login → 실제 서버 라우트에 맞춰 조정
       const response = await axios.post('/login', { email, password });
-      setMsg(response.data.message); // 서버에서 보내주는 메시지
-      // 필요하다면 response.data.user 등으로 유저 정보를 가져올 수도 있음
+      
+      if (response.data.result === "login_success") {
+        setMsg('로그인 성공!');
+        
+        // 로그인 성공 시 추가 작업 (예: localStorage에 저장)
+        localStorage.setItem('username', response.data.user.username);
+        localStorage.setItem('email', response.data.user.email);
+        localStorage.setItem('userId', response.data.user.user_id);
+
+        // 홈으로 리디렉션 또는 원하는 페이지로 이동
+        navigate('/'); 
+      } else {
+        setMsg(response.data.message || '로그인 실패!');
+      }
+
     } catch (error) {
       if (error.response) {
-        setMsg(error.response.data.message);
+        setMsg(error.response.data.message || '로그인 실패!');
       } else {
-        setMsg('로그인 중 오류가 발생했습니다.');
+        setMsg('서버 연결 중 오류가 발생했습니다.');
       }
     }
   };
