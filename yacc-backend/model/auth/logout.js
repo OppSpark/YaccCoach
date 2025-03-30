@@ -5,7 +5,7 @@ router.post("/logout", (req, res) => {
     // 세션이 없는 경우
     if (!req.session) {
         return res.send({
-            result: "logout_fail",
+            result: "logout_success",
             message: "No active session.",
         });
     }
@@ -15,7 +15,7 @@ router.post("/logout", (req, res) => {
         if (err) {
             console.error("Logout error:", err);
             return res.send({
-                result: "logout_fail",
+                result: "logout_success",
                 message: "Server error.",
             });
         }
