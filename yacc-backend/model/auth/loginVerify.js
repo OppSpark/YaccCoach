@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { isLoggedIn } = require("../service/authMiddleWare.js");
+const { isLoggedIn } = require("../middleware/authMiddleWare");
 
 router.post("/verifyUser", isLoggedIn, (req, res) => {
     const { user_id } = req.body;
