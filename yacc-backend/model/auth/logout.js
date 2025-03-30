@@ -14,17 +14,11 @@ router.post("/logout", (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             console.error("Logout error:", err);
-            return res.send({
-                result: "logout_success",
-                message: "Server error.",
-            });
+            return res.send({result: "logout_success",message: "Server error." });
         }
         // 쿠키 제거
         res.clearCookie("connect.sid");
-        return res.send({
-            result: "logout_success",
-            message: "Logged out successfully.",
-        });
+        return res.send({ result: "logout_success", message: "Logged out successfully.",});
     });
 });
 
