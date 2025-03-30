@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import './search-components.css'; 
 
 const SymptomChecker = () => {
   const [symptoms, setSymptoms] = useState('');

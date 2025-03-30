@@ -1,0 +1,65 @@
+/* 전체 레이아웃 */
+.login-container {
+    padding: 15px;
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: #f0f4f8;
+    font-family: 'Apple SD Gothic Neo', sans-serif;
+}
+
+/* 카드 박스 */
+.login-card {
+    background-color: #ffffff;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+/* 제목 */
+.login-card h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+    color: #2c3e50;
+}
+
+/* 입력 폼 */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* 입력창 */
+.login-form input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* 버튼 */
+.login-form button {
+    background-color: #007bff;
+    color: white;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #0056b3;
+}
+
+/* 메시지 */
+.login-msg {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: #d9534f;
+}
