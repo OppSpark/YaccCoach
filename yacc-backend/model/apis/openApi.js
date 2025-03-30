@@ -18,6 +18,11 @@ router.get("/drugInfo", (req, res) => {
 
     const axios = require("axios");
 
+    // 환경변수에 API 키가 존재하지 않는 경우 예외 처리
+    if (!process.env.OPENAPI_API_KEY) {
+        return res.status(500).json({ result: "missing_api_key" }); // 환경변수에서 API 키를 찾을 수 없음
+    }
+
     const serviceKey = decodeURIComponent(process.env.OPENAPI_API_KEY);
 
     axios
@@ -33,15 +38,24 @@ router.get("/drugInfo", (req, res) => {
                 seQesitm: seQesitm,
                 type: type,
             },
+            timeout: 5000 // 타임아웃 설정 (5초)
         })
         .then((response) => {
-            // console.log("API 요청 성공:", response.data);
-            console.log("API 요청 성공:", response.data);
+            if (!response.data || !response.data.body) {
+                return res.status(500).json({ result: "malformed_response" }); // 외부 API의 응답 형식이 예상과 다름
+            }
             res.json(response.data);
         })
         .catch((error) => {
-            console.error("API 요청 실패:", error);
-            res.status(500).json({ error: "외부 API 연동 실패" });
+            if (error.code === 'ECONNABORTED') {
+                return res.status(500).json({ result: "request_timeout" }); // API 요청 시간 초과
+            }
+
+            if (error.response && error.response.status === 403) {
+                return res.status(500).json({ result: "forbidden_access" }); // 외부 API 접근 권한 오류
+            }
+
+            return res.status(500).json({ result: "external_api_error" }); // 외부 공공데이터 API 호출 실패
         });
 });
 
