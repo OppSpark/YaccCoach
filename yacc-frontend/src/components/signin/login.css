@@ -63,3 +63,28 @@
     font-size: 0.95rem;
     color: #d9534f;
 }
+
+/* shake 애니메이션 */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.login-card.shake {
+    animation: shake 0.3s ease-in-out;
+}
+
+/* footer 텍스트 */
+.login-footer {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.login-footer a {
+    color: #007bff;
+    text-decoration: underline;
+}
