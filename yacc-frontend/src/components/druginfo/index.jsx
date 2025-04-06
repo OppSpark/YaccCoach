@@ -1,136 +1,123 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import axios from '../../config/axiosConfig';
-import './style.css';
+import React, { useState } from "react";
+import axios from "../../config/axiosConfig";
+import "./style.css";
 
-const DrugDetailPage = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
-    const [drugList, setDrugList] = useState([]);
-    const [loading, setLoading] = useState(true);
+const DrugSearchPage = () => {
+    const [query, setQuery] = useState("");
+    const [drugInfo, setDrugInfo] = useState([]);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [selectedDrug, setSelectedDrug] = useState(null);
 
-    const { itemName } = location.state || {};
-
-    useEffect(() => {
-        if (!itemName) {
-            navigate('/');
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        if (!query.trim()) {
+            setError("약품명을 입력해주세요.");
             return;
         }
 
-        const fetchDrugList = async () => {
-            try {
-                const response = await axios.get('/drugInfo', {
-                    params: {
-                        itemName: itemName,
-                        pageNo: 1,
-                        numOfRows: 10,
-                    },
-                });
-
-                const items = response.data?.body?.items;
-                if (!items || items.length === 0) {
-                    setError('약 정보가 존재하지 않아요.');
-                    return;
-                }
-
-                setDrugList(items);
-            } catch (err) {
-                setError('약 정보 조회에 실패했어요. 잠시 후 다시 시도해주세요.');
-            } finally {
-                setLoading(false);
+        try {
+            setLoading(true);
+            setError(null);
+            const response = await axios.get("/drugInfo", {
+                params: { itemName: query, pageNo: 1, numOfRows: 10 },
+            });
+            const items = response.data?.body?.items;
+            if (!items || items.length === 0) {
+                setError("해당 약품 정보를 찾을 수 없어요.");
+                setDrugInfo([]);
+            } else {
+                setDrugInfo(items);
             }
-        };
-
-        fetchDrugList();
-    }, [itemName, navigate]);
-
-    const highlightDisease = (text) => {
-        if (!text) return text;
-        return text;
+        } catch {
+            setError("검색 중 오류가 발생했어요.");
+            setDrugInfo([]);
+        } finally {
+            setLoading(false);
+        }
     };
-
-    const handleGoBack = () => {
-        navigate(-1);
-    };
-
-    const [selectedIndex, setSelectedIndex] = useState(null);
-
-    if (loading) return <div className="loading">약 정보를 불러오는 중...</div>;
-    if (error) return <div className="error-message">⚠️ {error}</div>;
 
     return (
         <div className="container">
-            <button onClick={handleGoBack} className="back-btn">← 뒤로 가기</button>
+            <h2>🔍 의약품 검색</h2>
+            <form onSubmit={handleSearch} className="search-form">
+                <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="약품명을 입력하세요"
+                    className="search-input"
+                />
+                <button
+                    type="submit"
+                    className="submit-btn"
+                    disabled={loading}
+                >
+                    {loading ? "검색 중..." : "검색"}
+                </button>
+            </form>
 
-            {drugList.length > 0 && (
-                <div className="drug-list">
-                    <p className="result-count">총 {drugList.length}개의 검색 결과가 있습니다.</p>
-                    <div className="drug-scroll-list">
-                        {drugList.map((drug, index) => (
-                            <div
-                                key={index}
-                                className={`detail-card clickable-card ${selectedIndex === index ? 'active' : ''}`}
-                                onClick={() => setSelectedIndex(index)}
-                            >
-                                <h3 className="detail-title">{drug.itemName}</h3>
-                                <p className="detail-sub">{drug.entpName}</p>
-                            </div>
-                        ))}
-                    </div>
+            {error && <p className="error-message">⚠️ {error}</p>}
 
-                    {selectedIndex !== null && (
-                        <div className="detail-card fade-in">
-                            <div className="detail-header">
-                                {drugList[selectedIndex].itemImage && (
-                                    <img
-                                        src={drugList[selectedIndex].itemImage}
-                                        alt="약 이미지"
-                                        className="drug-image"
-                                    />
-                                )}
-                                <div>
-                                    <h3 className="detail-title">{drugList[selectedIndex].itemName}</h3>
-                                    <p className="detail-sub">{drugList[selectedIndex].entpName}</p>
-                                </div>
-                            </div>
+            {drugInfo.length > 0 && (
+                <p className="result-count">총 {drugInfo.length}개의 검색 결과가 있습니다.</p>
+            )}
 
-                            <div className="info-block">
-                                <h4>📌 효능</h4>
-                                <p>{drugList[selectedIndex].efcyQesitm || '정보 없음'}</p>
-                            </div>
-
-                            <div className="info-block">
-                                <h4>💡 복용 방법</h4>
-                                <p>{drugList[selectedIndex].useMethodQesitm || '정보 없음'}</p>
-                            </div>
-
-                            {drugList[selectedIndex].atpnQesitm && (
-                                <div className="info-block highlight-warning">
-                                    <h4>⚠️ 주의사항</h4>
-                                    <p dangerouslySetInnerHTML={{ __html: highlightDisease(drugList[selectedIndex].atpnQesitm) }} />
-                                </div>
-                            )}
-
-                            {drugList[selectedIndex].intrcQesitm && (
-                                <div className="info-block highlight-interaction">
-                                    <h4>🥗 음식과의 상호작용</h4>
-                                    <p dangerouslySetInnerHTML={{ __html: highlightDisease(drugList[selectedIndex].intrcQesitm) }} />
-                                </div>
-                            )}
-
-                            {drugList[selectedIndex].seQesitm && (
-                                <div className="info-block highlight-sideeffect">
-                                    <h4>❗ 부작용</h4>
-                                    <p dangerouslySetInnerHTML={{ __html: highlightDisease(drugList[selectedIndex].seQesitm) }} />
-                                </div>
+            {drugInfo.length > 0 && (
+                <div className="horizontal-scroll">
+                    {drugInfo.map((item, idx) => (
+                        <div
+                            className={`detail-card fade-in clickable-card ${selectedDrug === idx ? 'active' : ''}`}
+                            key={idx}
+                            onClick={() => setSelectedDrug(idx)}
+                        >
+                            <h3 className="detail-title">{item.itemName}</h3>
+                            <p className="detail-sub">{item.entpName}</p>
+                            {selectedDrug === idx && (
+                                <>
+                                    <div className="detail-header">
+                                        {item.itemImage && (
+                                            <img
+                                                src={item.itemImage}
+                                                alt="약 이미지"
+                                                className="drug-image"
+                                            />
+                                        )}
+                                    </div>
+                                    <div className="info-block">
+                                        <h4>📌 효능</h4>
+                                        <p>{item.efcyQesitm || "정보 없음"}</p>
+                                    </div>
+                                    <div className="info-block">
+                                        <h4>💡 복용 방법</h4>
+                                        <p>{item.useMethodQesitm || "정보 없음"}</p>
+                                    </div>
+                                    {item.atpnQesitm && (
+                                        <div className="info-block highlight-warning">
+                                            <h4>⚠️ 주의사항</h4>
+                                            <p>{item.atpnQesitm}</p>
+                                        </div>
+                                    )}
+                                    {item.intrcQesitm && (
+                                        <div className="info-block highlight-interaction">
+                                            <h4>🥗 음식과의 상호작용</h4>
+                                            <p>{item.intrcQesitm}</p>
+                                        </div>
+                                    )}
+                                    {item.seQesitm && (
+                                        <div className="info-block highlight-sideeffect">
+                                            <h4>❗ 부작용</h4>
+                                            <p>{item.seQesitm}</p>
+                                        </div>
+                                    )}
+                                </>
                             )}
                         </div>
-                    )}
+                    ))}
                 </div>
             )}
         </div>
     );
 };
 
-export default DrugDetailPage;
+export default DrugSearchPage;
