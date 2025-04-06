@@ -7,10 +7,10 @@ import Login from './components/signin/login.jsx';
 import SymptomChecker from './components/search/search-components.jsx';
 import Signup from './components/signup/index.jsx';
 import DrugDetailPage from './components/search/DrugDetailPage.jsx';
-import Header from './components/header/header.jsx';
 import Footer from './components/foorter/footer.jsx';
 import MainPage from './components/index/index.jsx';
 import DrugSearchPage from './components/druginfo/index.jsx';
+import MyPage from './components/mypage/index.jsx';
 
 
 
@@ -35,6 +35,7 @@ root.render(
       <Route path="/symptom-checker" element={<Layout><SymptomChecker /></Layout>} />
       <Route path="/drug-detail" element={<Layout><DrugDetailPage /></Layout>} />
       <Route path="/drugInfo" element={<Layout><DrugSearchPage /></Layout>} />
+      <Route path="/mypage" element={<Layout><MyPage /></Layout>} />
     </Routes>
     </BrowserRouter>
   </React.StrictMode>
