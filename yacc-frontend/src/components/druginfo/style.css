@@ -1,0 +1,115 @@
+/* 검색 입력창 */
+.search-input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 18px;
+    font-size: 15px;
+    background-color: #fff;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+}
+
+/* 카드 애니메이션 */
+.fade-in {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 약 이미지 */
+.drug-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: contain;
+    margin-right: 12px;
+}
+
+/* 상세 정보 카드 */
+.detail-card {
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 18px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    margin-top: 20px;
+    animation: fadeIn 0.4s ease;
+}
+
+/* 카드 안의 헤더 */
+.detail-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.detail-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.detail-sub {
+    font-size: 14px;
+    color: #777;
+}
+
+/* 정보 블록 */
+.info-block {
+    margin-top: 16px;
+}
+
+.info-block h4 {
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: #2c3e50;
+}
+
+.info-block p {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 에러 메시지 */
+.error-message {
+    color: #dc3545;
+    padding: 12px;
+    background: #ffeef0;
+    border-radius: 12px;
+    margin-top: 12px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* 모바일 레이아웃 */
+@media (min-width: 768px) {
+    .search-input {
+        max-width: 600px;
+        margin: 0 auto 12px auto;
+    }
+
+    .detail-card {
+        max-width: 600px;
+        margin: 20px auto;
+    }
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* 입력창과 버튼 사이 여백 */
+    margin-bottom: 20px;
+}
