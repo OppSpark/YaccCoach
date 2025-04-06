@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mysqlDB = require("../database/databaseInfo.js");
 
-router.get("/user", (req, res) => {
+router.post("/user", (req, res) => {
     const { user_id } = req.body;
 
     if (!user_id) return res.status(400).json({ result: "user_id_required", message: "user_id is required" });
