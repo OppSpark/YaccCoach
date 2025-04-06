@@ -1,0 +1,29 @@
+/* components/Header.css */
+
+.yakcoach-header {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: #007BFF;
+  margin: 0;
+}
+
+.greeting {
+  font-size: 14px;
+  color: #444;
+  font-weight: 500;
+}
