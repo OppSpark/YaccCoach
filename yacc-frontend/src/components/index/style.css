@@ -1,0 +1,27 @@
+.main-container {
+  padding-bottom: 70px;
+  background-color: #f0f4f8;
+  min-height: 100vh;
+  font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+}
+
+.feature-section {
+  display: grid;
+  gap: 16px;
+  
+
+.feature-card {
+  background: white;
+  padding: 18px;
+  border-radius: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  background-color: #f8f9fa;
+}
+padding: 20px;
+}
