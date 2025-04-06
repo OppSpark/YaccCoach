@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mysqlDB = require("../database/databaseInfo.js");
 
-router.get("/disease", (req, res) => {
+router.post("/disease/list", (req, res) => {
     const { user_id } = req.body;
     const pageNo = parseInt(req.query.reqPage || "1", 10);
     const offset = (pageNo - 1) * 5;
