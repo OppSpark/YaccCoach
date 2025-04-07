@@ -58,7 +58,7 @@ const PreferenceManager = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete("/preference", {
-        data: { preference_id: id },
+        data: { id: id, user_id: userId },
       });
       setRefresh(!refresh);
     } catch (err) {
