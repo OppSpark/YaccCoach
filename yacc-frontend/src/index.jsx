@@ -11,6 +11,7 @@ import Footer from './components/foorter/footer.jsx';
 import MainPage from './components/index/index.jsx';
 import DrugSearchPage from './components/druginfo/index.jsx';
 import MyPage from './components/mypage/index.jsx';
+import DiseaseManager from './components/disease/index.jsx';
 
 
 
@@ -36,6 +37,7 @@ root.render(
       <Route path="/drug-detail" element={<Layout><DrugDetailPage /></Layout>} />
       <Route path="/drugInfo" element={<Layout><DrugSearchPage /></Layout>} />
       <Route path="/mypage" element={<Layout><MyPage /></Layout>} />
+      <Route path="/disease" element={<Layout><DiseaseManager /></Layout>} />
     </Routes>
     </BrowserRouter>
   </React.StrictMode>

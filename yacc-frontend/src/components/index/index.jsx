@@ -35,7 +35,7 @@ const MainPage = () => {
 
                 <div
                     className="feature-card"
-                    onClick={() => alert("기존 질환 관리 준비 중")}
+                    onClick={() => navigate("/disease")}
                 >
                     <h3>⚕️ 기존 질환 관리</h3>
                     <p>기존에 등록한 질환을 관리해요</p>
