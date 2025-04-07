@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import axios from '../../config/axiosConfig';
+
 import './style.css';
 
 const Signup = () => {
@@ -30,6 +32,7 @@ const Signup = () => {
     const nextStep = () => setStep((prev) => prev + 1);
     const prevStep = () => setStep((prev) => prev - 1);
 
+<<<<<<< HEAD
     const isStepValid = () => {
         switch (step) {
             case 2: return formData.username.trim() !== '';
@@ -44,6 +47,29 @@ const Signup = () => {
             case 6: return formData.address.trim() !== '';
             case 7: return formData.agreed === true;
             default: return true;
+=======
+    const handleSubmit = async () => {
+        try {
+            const payload = {
+                username: formData.username,
+                email: formData.email,
+                password: formData.password,
+                tel_number: formData.tel.replace(/-/g, ''),
+                address: formData.address,
+                agreed_personal: formData.agreed ? 1 : 0,
+            };
+
+            const res = await axios.post('/signUp', payload);
+
+            if (res.data.result === 'register_success') {
+                alert('회원가입 완료!');
+                window.location.href = '/login';
+            } else {
+                alert(res.data.message || '회원가입 실패');
+            }
+        } catch (err) {
+            alert(err.response?.data?.message || '서버 오류 발생');
+>>>>>>> dev
         }
     };
 
@@ -74,7 +100,11 @@ const Signup = () => {
                         <p>이메일은 로그인 시 사용됩니다.</p>
                         <input ref={inputRef} type="email" value={formData.email} onChange={handleChange('email')} placeholder="Yacc@coach.com" required />
                         <div className="nav-buttons">
+<<<<<<< HEAD
                             <button className="back-button"onClick={prevStep}>이전</button>
+=======
+                            <button className="back-button" onClick={prevStep}>이전</button>
+>>>>>>> dev
                         </div>
                     </div>
                 );
@@ -83,6 +113,7 @@ const Signup = () => {
                     <div className="card">
                         <h3>🔑 비밀번호를 설정해주세요</h3>
                         <p>8자 이상, 대/소문자, 숫자, 특수문자 포함해야해요.</p>
+<<<<<<< HEAD
                         <form autoComplete="off" className="signup-form">
                         <input type="text" name="fake-username" autoComplete="username" style={{ display: 'none' }} />
                         <input type="password" name="fake-password" autoComplete="new-password" style={{ display: 'none' }} />
@@ -95,6 +126,12 @@ const Signup = () => {
 
                         <div className="nav-buttons">
                         <button className="back-button"onClick={prevStep}>이전</button>
+=======
+                        <input ref={inputRef} type="password" value={formData.password} onChange={handleChange('password')} placeholder="비밀번호" required autoComplete="new-password" />
+                        <input type="password" value={formData.confirmPassword} onChange={handleChange('confirmPassword')} placeholder="비밀번호 확인" required autoComplete="new-password" />
+                        <div className="nav-buttons">
+                            <button className="back-button" onClick={prevStep}>이전</button>
+>>>>>>> dev
                         </div>
                     </div>
                 );
@@ -105,7 +142,11 @@ const Signup = () => {
                         <p>본인 확인을 위해 필요합니다.</p>
                         <input ref={inputRef} type="tel" value={formData.tel} onChange={handleChange('tel')} placeholder="010-0000-0000" required />
                         <div className="nav-buttons">
+<<<<<<< HEAD
                         <button className="back-button"onClick={prevStep}>이전</button>
+=======
+                            <button className="back-button" onClick={prevStep}>이전</button>
+>>>>>>> dev
                         </div>
                     </div>
                 );
@@ -116,7 +157,11 @@ const Signup = () => {
                         <p>위치 기반 약국 검색에 사용됩니다.</p>
                         <input ref={inputRef} type="text" value={formData.address} onChange={handleChange('address')} placeholder="우리집 주소" required />
                         <div className="nav-buttons">
+<<<<<<< HEAD
                         <button className="back-button"onClick={prevStep}>이전</button>
+=======
+                            <button className="back-button" onClick={prevStep}>이전</button>
+>>>>>>> dev
                         </div>
                     </div>
                 );
@@ -129,7 +174,11 @@ const Signup = () => {
                             <input type="checkbox" checked={formData.agreed} onChange={handleChange('agreed')} required /> 약관 및 개인정보 수집에 동의합니다.
                         </label>
                         <div className="nav-buttons">
+<<<<<<< HEAD
                         <button className="back-button"onClick={prevStep}>이전</button>
+=======
+                            <button className="back-button" onClick={prevStep}>이전</button>
+>>>>>>> dev
                         </div>
                     </div>
                 );
@@ -138,16 +187,34 @@ const Signup = () => {
         }
     };
 
+<<<<<<< HEAD
     return (
         <div className="signup-container">
             <input type="text" name="fake-username" autoComplete="username" style={{ display: 'none' }} />
             <input type="password" name="fake-password" autoComplete="new-password" style={{ display: 'none' }} />
+=======
+    const isStepValid = () => {
+        switch (step) {
+            case 2: return formData.username.trim() !== '';
+            case 3: return formData.email.trim() !== '';
+            case 4: return formData.password && formData.confirmPassword && formData.password === formData.confirmPassword;
+            case 5: return formData.tel.trim() !== '';
+            case 6: return formData.address.trim() !== '';
+            case 7: return formData.agreed;
+            default: return true;
+        }
+    };
+
+    return (
+        <div className="signup-container">
+>>>>>>> dev
             <h2>회원가입</h2>
             {renderStep()}
 
             {step > 1 && (
                 <div className="global-next-btn-container">
                     {step === 7 ? (
+<<<<<<< HEAD
                         <button
                             className="btn-primary"
                             onClick={() => alert("가입 완료!")}
@@ -161,6 +228,13 @@ const Signup = () => {
                             onClick={nextStep}
                             disabled={!isStepValid()}
                         >
+=======
+                        <button className="btn-primary" onClick={handleSubmit} disabled={!isStepValid()}>
+                            가입하기
+                        </button>
+                    ) : (
+                        <button className="btn-primary" onClick={nextStep} disabled={!isStepValid()}>
+>>>>>>> dev
                             다음
                         </button>
                     )}
@@ -172,4 +246,8 @@ const Signup = () => {
     );
 };
 
+<<<<<<< HEAD
 export default Signup;
+=======
+export default Signup;
+>>>>>>> dev

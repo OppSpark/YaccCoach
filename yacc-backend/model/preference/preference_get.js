@@ -3,7 +3,7 @@ const router = express.Router();
 const mysqlDB = require("../database/databaseInfo.js");
 
 // 사용자 선호도 정보 조회 API
-router.get("/preference", (req, res) => {
+router.post("/preference/list", (req, res) => {
     const { user_id } = req.body; // 필요 시 req.query.user_id 또는 req.session.userId로 변경 가능
     const pageNo = parseInt(req.query.reqPage) || 1;
     const limit = 5;
