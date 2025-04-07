@@ -2,14 +2,15 @@ const express = require("express");
 const router = express.Router();
 const mysqlDB = require("../database/databaseInfo.js");
 
-router.get("/disease", (req, res) => {
+router.post("/disease/list", (req, res) => {
     const { user_id } = req.body;
     const pageNo = parseInt(req.query.reqPage || "1", 10);
     const offset = (pageNo - 1) * 5;
 
-    if (!user_id)
+    if (!user_id){
+	console.log(user_id);
         return res.status(400).json({ result: "user_id_required", message: "user_id is required" }); // user_id 누락
-
+    }
     if (isNaN(pageNo) || pageNo < 1)
         return res.status(400).json({ result: "invalid_page_number", message: "reqPage must be a positive integer" }); // 페이지 번호 유효하지 않음
 
