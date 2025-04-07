@@ -15,7 +15,7 @@ router.put("/preference", (req, res) => {
     const updatePreferenceSQL = `
         UPDATE user_preference
         SET company_name = ?
-        WHERE id = ? AND user_id = ?
+        WHERE preference_id = ? AND user_id = ?
     `;
 
     mysqlDB.query(updatePreferenceSQL, [company_name, id, user_id], (err, result) => {
