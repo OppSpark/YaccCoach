@@ -17,3 +17,5 @@ npm install csurf
 
 frontend
 npm install axios
+npm install react-router-dom
+npm install zustand
