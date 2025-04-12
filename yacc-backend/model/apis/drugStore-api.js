@@ -9,8 +9,8 @@ router.get("/storeInfo", async (req, res) => {
     const apiUrl = "http://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyListInfoInqire";
 
     const {
-        Q0 = "서울특별시",     // 시도
-        Q1 = "강남구",         // 시군구
+        Q0 = "부산광역시",     // 시도
+        Q1 = "남구",         // 시군구
         QT = "1",             // 요일코드 (1~8: 월~일, 공휴일)
         QN = "",              // 기관명 (약국명)
         ORD = "NAME",        // 정렬 기준
