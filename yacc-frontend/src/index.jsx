@@ -12,6 +12,8 @@ import MainPage from './components/index/index.jsx';
 import DrugSearchPage from './components/druginfo/index.jsx';
 import MyPage from './components/mypage/index.jsx';
 import DiseaseManager from './components/disease/index.jsx';
+import PreferenceManager from './components/preference/index.jsx';
+import PharmacyList from './components/storeinfo/index.jsx'
 
 
 
@@ -38,6 +40,8 @@ root.render(
       <Route path="/drugInfo" element={<Layout><DrugSearchPage /></Layout>} />
       <Route path="/mypage" element={<Layout><MyPage /></Layout>} />
       <Route path="/disease" element={<Layout><DiseaseManager /></Layout>} />
+      <Route path="/preference" element={<Layout><PreferenceManager /></Layout>} />
+      <Route path="/storeInfo" element={<Layout><PharmacyList /></Layout>} />
     </Routes>
     </BrowserRouter>
   </React.StrictMode>

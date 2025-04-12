@@ -12,3 +12,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* 페이지 전체 높이 확보 및 푸터 영역 여백 확보 */
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding-bottom: 90px; /* 푸터 높이만큼 여백을 확보 */
+}
+
