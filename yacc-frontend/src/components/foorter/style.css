@@ -1,4 +1,4 @@
-/* Footer - 하단 고정 네비게이션 스타일 */
+/* Footer 스타일 */
 .app-footer {
   position: fixed;
   bottom: 0;
@@ -6,7 +6,7 @@
   width: 100%;
   background: #ffffff;
   border-top: 1px solid #e0e0e0;
-  padding: 12px 0 18px 0; /* 상단 12px, 하단 18px 여유 */
+  padding: 12px 0 18px 0;
   z-index: 100;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
 }
@@ -17,19 +17,37 @@
   align-items: center;
 }
 
-.footer-nav span {
+.footer-link {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 500;
   color: #555;
   padding: 6px 0;
   min-width: 60px;
   cursor: pointer;
   transition: color 0.2s ease;
+  text-decoration: none;
 }
 
-.footer-nav span:hover {
+.footer-link:hover {
   color: #007BFF;
+}
+
+.footer-link svg {
+  margin-bottom: 4px;
+  color: #444;
+}
+
+.footer-link.active {
+  color: #007BFF;
+  font-weight: 600;
+}
+.footer-icon-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color: #333;
 }

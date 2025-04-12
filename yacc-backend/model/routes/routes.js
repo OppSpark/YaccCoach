@@ -41,6 +41,10 @@ router.use("/", disease_put);
 const disease_delete = require("../disease/disease_delete.js");
 router.use("/", disease_delete);
 
+//약국 정보 GET /storeInfo
+const drugStore_get = require("../apis/drugStore-api.js")
+router.use("/",drugStore_get); 
+
 // 선호 회사 정보 GET /preference
 const preference_get = require("../preference/preference_get.js");
 router.use("/", preference_get);
