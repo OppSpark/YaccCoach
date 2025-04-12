@@ -1,0 +1,105 @@
+/* PharmacyLocator 관련 스타일 */
+
+.locator-container {
+    padding: 16px;
+    font-family: 'Noto Sans KR', sans-serif;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  
+  .locator-container h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  
+  .locator-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  
+  .locator-buttons button {
+    flex: 1;
+    padding: 10px 14px;
+    font-size: 15px;
+    border-radius: 12px;
+    border: none;
+    background-color: #3182f6;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .locator-buttons button:hover {
+    background-color: #2563eb;
+  }
+  
+  .search-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  
+  .search-fields select,
+  .search-fields input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 15px;
+  }
+  
+  .search-fields button {
+    padding: 10px;
+    border: none;
+    background-color: #10b981;
+    color: white;
+    border-radius: 12px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .search-fields button:hover {
+    background-color: #059669;
+  }
+  
+  .error-message {
+    color: #e11d48;
+    margin: 10px 0;
+    font-size: 14px;
+  }
+  
+  .pharmacy-results {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 16px;
+  }
+  
+  .pharmacy-card {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .pharmacy-card h3 {
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+  
+  .pharmacy-card p {
+    margin: 2px 0;
+    font-size: 14px;
+    color: #374151;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 15px;
+    color: #6b7280;
+    margin-top: 20px;
+  }
