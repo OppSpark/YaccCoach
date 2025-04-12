@@ -59,7 +59,22 @@ const PharmacyLocator = () => {
           }
           setRegion(Q0);
           setDistrict(Q1);
-          await fetchByAddress();
+          await axios.get("/storeInfo", {
+            params: {
+              Q0,
+              Q1,
+              QT: 1,
+              ORD: "NAME",
+              pageNo: 1,
+              numOfRows: 10,
+            },
+          }).then(res => {
+            const items = res.data.data.items?.item || res.data.data || [];
+            setPharmacies(Array.isArray(items) ? items : [items]);
+            setError("");
+          }).catch(() => {
+            setError("API 호출 실패");
+          });
         } catch (err) {
           setError("위치 기반 주소 변환 실패");
         } finally {
