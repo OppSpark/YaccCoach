@@ -4,6 +4,8 @@ const router = express.Router();
 
 // 약국 정보 조회 API (공공데이터)
 router.get("/storeInfo", async (req, res) => {
+    console.log("🧭 Incoming request to /storeInfo");
+    
     const apiUrl = "http://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyListInfoInqire";
 
     const {
@@ -21,6 +23,11 @@ router.get("/storeInfo", async (req, res) => {
     }
 
     const serviceKey = decodeURIComponent(process.env.PHARMACY_API_KEY);
+    console.log("🛠️ /storeInfo endpoint triggered");
+
+    console.log("약국 API 호출 요청 시작:", {
+        Q0, Q1, QT, QN, ORD, pageNo, numOfRows
+    });
 
     try {
         const response = await axios.get(apiUrl, {
@@ -33,18 +40,22 @@ router.get("/storeInfo", async (req, res) => {
                 ORD,
                 pageNo,
                 numOfRows,
-                _type: "json"
             },
             timeout: 5000
         });
 
-        if (!response.data || !response.data.body) {
+        console.log("공공데이터 응답 수신:", response.data);
+
+        const body = response.data?.response?.body;
+
+        if (!body) {
+            console.log("예상치 못한 응답 구조:", response.data);
             return res.status(500).json({ result: "malformed_response", message: "공공데이터 응답 오류" });
         }
 
         return res.status(200).json({
             result: "store_fetch_success",
-            data: response.data.body
+            data: body
         });
     } catch (err) {
         console.error("공공 API 호출 오류:", err);
