@@ -14,10 +14,13 @@ const PharmacyLocator = () => {
   const fetchByAddress = async () => {
     try {
       setLoading(true);
+      const safeRegion = region && region.trim() !== "" ? region : "서울특별시";
+      const safeDistrict = district && district.trim() !== "" ? district : "강남구";
+
       const res = await axios.get("/storeInfo", {
         params: {
-          Q0: region,
-          Q1: district,
+          Q0: safeRegion,
+          Q1: safeDistrict,
           QT: 1,
           ORD: "NAME",
           pageNo: 1,
