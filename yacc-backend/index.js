@@ -65,7 +65,7 @@ app.use("/", routes);
 // ----------------------------------------
 // 4) 서버 실행
 // ----------------------------------------
-const PORT = process.env.PORT || 3330;
+const PORT = process.env.PORT || 3331;
 app.listen(PORT, () => {
   console.log(`${PORT} 포트에서 서버가 동작`);
 });
