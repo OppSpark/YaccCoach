@@ -27,7 +27,7 @@ const MainPage = () => {
 
                 <div
                     className="feature-card"
-                    onClick={() => alert("선호 제약사 설정 준비 중")}
+                    onClick={() => navigate("/preference")}
                 >
                     <h3>🏢 선호 제약사 설정</h3>
                     <p>좋아하는 제약사를 선택할 수 있어요</p>
