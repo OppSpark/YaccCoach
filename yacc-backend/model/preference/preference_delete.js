@@ -14,7 +14,7 @@ router.delete("/preference", (req, res) => {
 
     const deletePreferenceSQL = `
         DELETE FROM user_preference
-        WHERE id = ? AND user_id = ?
+        WHERE preference_id = ? AND user_id = ?
     `;
 
     mysqlDB.query(deletePreferenceSQL, [id, user_id], (err, result) => {
