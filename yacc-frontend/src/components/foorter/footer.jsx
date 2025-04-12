@@ -8,7 +8,7 @@ const Footer = () => {
       <nav className="footer-nav">
         <Link to="/" className="footer-link">🏠 홈</Link>
         <Link to="/drugInfo">💊 의약품</Link>
-        <Link>📍 약국</Link>
+        <Link to="/storeInfo">📍 약국</Link>
         <Link to="/mypage">👤 마이페이지</Link>
       </nav>
     </footer>

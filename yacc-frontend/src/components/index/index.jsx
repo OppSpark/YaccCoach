@@ -19,8 +19,8 @@ const MainPage = () => {
 
                 <div
                     className="feature-card"
-                    onClick={() => alert("근처 약국 찾기 준비 중")}
-                >
+                    onClick={() => navigate("/storeInfo")}>
+
                     <h3>📍 근처 약국 찾기</h3>
                     <p>GPS 기반으로 약국 위치를 확인해요</p>
                 </div>
