@@ -19,7 +19,7 @@ app.use(cookieParser());
 // ★주의★: subdomain 간 쿠키 사용 시 sameSite='none' & secure=true(HTTPS)
 app.use(
   cors({
-    origin: 'https://dev.yacccoach.oppspark.net', 
+    origin: 'https://yacccoach.oppspark.net', 
     origin: true ,
     credentials: true, // 쿠키/세션 허용
     methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'], // 허용할 HTTP 메서드
