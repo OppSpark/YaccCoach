@@ -77,4 +77,9 @@ router.use("/", user_put);
 const user_changePassword = require("../auth/userChangePassword");
 router.use("/", user_changePassword);
 
+
+// 위치 정보 불러오기 GET /reverseGeocode
+const reverseGeocode = require("../apis/reverseGeocode.js");
+router.use("/", reverseGeocode);
+
 module.exports = router;
