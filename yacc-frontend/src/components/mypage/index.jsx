@@ -59,7 +59,9 @@ const MyPage = () => {
                     // 로컬스토리지 + 쿠키 삭제
                     localStorage.removeItem("userId");
                     localStorage.removeItem("email");
-                    localStorage.removeItem("username");
+                    localStorage.removeItem("username"); 
+                    document.cookie = "connect.sid=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+                    
                     document.cookie.split(";").forEach((cookie) => {
                         const name = cookie.split("=")[0].trim();
                         document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
