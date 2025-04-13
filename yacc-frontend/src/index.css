@@ -24,4 +24,11 @@ main {
   flex: 1;
   padding-bottom: 90px; /* 푸터 높이만큼 여백을 확보 */
 }
+input, textarea, select {
+  font-size: 16px; /* ✅ iOS 확대 방지용 */
+}
 
+html, body {
+  touch-action: manipulation; /* ✅ 터치 동작 안정화 */
+  overscroll-behavior: none;  /* ✅ 터치스크롤 과잉 동작 제거 */
+}
