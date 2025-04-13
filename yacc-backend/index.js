@@ -19,7 +19,7 @@ app.use(cookieParser());
 // ★주의★: subdomain 간 쿠키 사용 시 sameSite='none' & secure=true(HTTPS)
 app.use(
   cors({
-    origin: 'http://dev.yacccoach.oppspark.net', 
+    origin: 'https://dev.yacccoach.oppspark.net', 
     origin: true ,
     credentials: true, // 쿠키/세션 허용
     methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'], // 허용할 HTTP 메서드
@@ -28,8 +28,6 @@ app.use(
 );
 app.options('*', cors());
 // app.use(cors()); // 모든 도메인 허용
-
-// OPTIONS preflight 대응 추가 설정
 
 // ----------------------------------------
 // 2) 세션 설정
@@ -43,7 +41,7 @@ app.use(session({
   saveUninitialized: true,
   store: sessionStore,
   cookie: {
-    httpOnly: true,
+    httpOnly: false,
     secure: false,      // HTTP 환경에서는 반드시 false
     sameSite: 'lax',    // 반드시 lax로 설정
     domain: 'yacccoach.oppspark.net', // 도메인 설정
