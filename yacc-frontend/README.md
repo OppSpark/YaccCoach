@@ -9,13 +9,17 @@
 
 ```
 yacc-frontend/
-├── public/
+├── public/                     # 정적 리소스 (favicon, manifest 등)
 ├── src/
-│   ├── components/
-│   ├── config/
-│   ├── index.css
-│   └── App.jsx
-├── .env
+│   ├── apis/                   # API 요청 함수
+│   ├── assets/                 # 아이콘, 이미지 등 정적 리소스
+│   ├── components/             # 재사용 가능한 UI 컴포넌트
+│   ├── config/                 # Axios, 환경 설정 등
+│   ├── pages/                  # 라우팅별 페이지
+│   ├── service/                # 서비스 단 로직
+│   ├── index.css               # 글로벌 스타일
+│   └── index.jsx               # 엔트리 포인트
+├── .env                        # 환경 변수 설정
 ├── package.json
 └── README.md
 ```
