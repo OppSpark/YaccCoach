@@ -1,5 +1,5 @@
 const API_CONFIG = {
-    baseURL: 'https://api.yacccoach.oppspark.net',
+    baseURL: process.env.REACT_APP_API_URL,
     endpoints: {
       drugInfo: '/drugInfo'
     },
