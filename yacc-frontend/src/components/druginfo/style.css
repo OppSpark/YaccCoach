@@ -113,3 +113,48 @@
     /* 입력창과 버튼 사이 여백 */
     margin-bottom: 20px;
 }
+
+.recent-keywords {
+    margin: 20px 0;
+  }
+  
+  .keyword-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .keyword-chip {
+    background-color: #e5f0ff;
+    color: #0052cc;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .keyword-chip:hover {
+    background-color: #d0e4ff;
+  }
+  
+  .ai-suggestion-box {
+    background-color: #f3f7ff;
+    padding: 16px;
+    border-radius: 12px;
+    margin: 20px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .ai-suggestion-box button {
+    margin-top: 8px;
+    padding: 10px 16px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }

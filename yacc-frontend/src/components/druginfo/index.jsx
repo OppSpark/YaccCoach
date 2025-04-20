@@ -8,6 +8,7 @@ const DrugSearchPage = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [selectedDrug, setSelectedDrug] = useState(null);
+    const [recentKeywords, setRecentKeywords] = useState([]);
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -28,6 +29,8 @@ const DrugSearchPage = () => {
                 setDrugInfo([]);
             } else {
                 setDrugInfo(items);
+                // 최근 검색어 업데이트 (중복 방지)
+                setRecentKeywords(prev => [query, ...prev.filter(k => k !== query)].slice(0, 5));
             }
         } catch {
             setError("검색 중 오류가 발생했어요.");
@@ -48,17 +51,32 @@ const DrugSearchPage = () => {
                     placeholder="약품명을 입력하세요"
                     className="search-input"
                 />
-                <button
-                    type="submit"
-                    className="submit-btn"
-                    disabled={loading}
-                >
+                <button type="submit" className="submit-btn" disabled={loading}>
                     {loading ? "검색 중..." : "검색"}
                 </button>
             </form>
 
-            {error && <p className="error-message">⚠️ {error}</p>}
+            {recentKeywords.length > 0 && (
+                <div className="recent-keywords">
+                    <h4>🕘 최근 검색</h4>
+                    <div className="keyword-list">
+                        {recentKeywords.map((word, idx) => (
+                            <span key={idx} className="keyword-chip" onClick={() => setQuery(word)}>
+                                {word}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            )}
 
+            <div className="ai-suggestion-box">
+                <p>❓ 어떤 약을 찾아야 할지 모르겠다면</p>
+                <button onClick={() => window.location.href = "/symptom-checker"}>
+                    AI 진단으로 추천 받기
+                </button>
+            </div>
+
+            {error && <p className="error-message">⚠️ {error}</p>}
             {drugInfo.length > 0 && (
                 <p className="result-count">총 {drugInfo.length}개의 검색 결과가 있습니다.</p>
             )}

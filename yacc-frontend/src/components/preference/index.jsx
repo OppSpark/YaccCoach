@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../config/axiosConfig";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 const ALL_COMPANIES = [
@@ -17,10 +18,12 @@ const ALL_COMPANIES = [
 ];
 
 const PreferenceManager = () => {
+  const navigate = useNavigate();
   const [preferences, setPreferences] = useState([]);
   const [search, setSearch] = useState("");
   const [error, setError] = useState("");
   const [refresh, setRefresh] = useState(false);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
   const userId = localStorage.getItem("userId");
 
   const filteredCompanies = ALL_COMPANIES.filter(c =>
@@ -28,6 +31,11 @@ const PreferenceManager = () => {
   );
 
   useEffect(() => {
+    if (!userId) {
+      setShowLoginPrompt(true);
+      return;
+    }
+
     const fetchPreferences = async () => {
       try {
         const res = await axios.post("/preference/list", {
@@ -39,7 +47,7 @@ const PreferenceManager = () => {
       }
     };
 
-    if (userId) fetchPreferences();
+    fetchPreferences();
   }, [refresh, userId]);
 
   const handleAdd = async (company) => {
@@ -65,6 +73,20 @@ const PreferenceManager = () => {
       setError("삭제에 실패했어요.");
     }
   };
+
+  if (showLoginPrompt) {
+    return (
+      <div className="modal-overlay">
+        <div className="modal-content">
+          <p>로그인이 되어 있지 않습니다.<br />로그인 페이지로 이동할까요?</p>
+          <div className="modal-buttons">
+            <button className="submit-btn" onClick={() => navigate("/login")}>예</button>
+            <button className="cancel-btn" onClick={() => navigate(-1)}>아니오</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container">

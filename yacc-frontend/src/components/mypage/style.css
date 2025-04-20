@@ -1,31 +1,79 @@
 .mypage-container {
-    padding: 20px;
-    background: #f9fafb;
-    font-family: 'Pretendard', sans-serif;
-  }
-  
-  .user-card {
-    background: #fff;
-    padding: 20px;
-    border-radius: 18px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    margin-bottom: 20px;
-  }
-  
-  .user-card p {
-    margin: 10px 0;
-    font-size: 15px;
-    line-height: 1.4;
-  }
-  
-  .logout-btn {
-    width: 100%;
-    background: #ff6b6b;
-    color: white;
-    border: none;
-    padding: 14px;
-    font-size: 16px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-  }
+  padding: 20px;
+  background: #f9fafb;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.user-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+}
+
+.user-card p {
+  margin: 10px 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.logout-btn {
+  width: 100%;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.info-links {
+  margin-top: 30px;
+}
+
+.info-links h3 {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.info-links ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.info-links li {
+  margin-bottom: 10px;
+}
+
+.info-links a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.tips-section {
+  margin-top: 30px;
+}
+
+.tips-section h3 {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tip-card {
+  background: #f1f8ff;
+  border-left: 4px solid #007bff;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #333;
+}

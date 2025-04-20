@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../config/axiosConfig";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 const DiseaseManager = () => {
+    const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
     const [diseases, setDiseases] = useState([]);
     const [newDisease, setNewDisease] = useState("");
     const [editDiseaseId, setEditDiseaseId] = useState(null);
@@ -10,6 +13,12 @@ const DiseaseManager = () => {
     const [error, setError] = useState("");
     const [refresh, setRefresh] = useState(false);
     const userId = localStorage.getItem("userId");
+
+    useEffect(() => {
+        if (!userId) {
+            setShowModal(true);
+        }
+    }, []);
 
     useEffect(() => {
         const fetchDiseases = async () => {
@@ -63,6 +72,20 @@ const DiseaseManager = () => {
         }
     };
 
+    if (showModal) {
+        return (
+            <div className="modal-overlay">
+                <div className="modal-content">
+                    <p>로그인이 되어 있지 않습니다. 로그인 페이지로 이동할까요?</p>
+                    <div className="modal-buttons">
+                        <button className="submit-btn" onClick={() => navigate("/login")}>예</button>
+                        <button className="cancel-btn" onClick={() => navigate(-1)}>아니오</button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="container">
             <h2>🩺 내 질환 관리</h2>
@@ -89,16 +112,12 @@ const DiseaseManager = () => {
                                 <input
                                     type="text"
                                     value={editDiseaseName}
-                                    onChange={(e) =>
-                                        setEditDiseaseName(e.target.value)
-                                    }
+                                    onChange={(e) => setEditDiseaseName(e.target.value)}
                                     className="input"
                                 />
                                 <button
                                     className="edit-btn"
-                                    onClick={() =>
-                                        handleUpdate(disease.disease_id)
-                                    }
+                                    onClick={() => handleUpdate(disease.disease_id)}
                                 >
                                     저장
                                 </button>
@@ -115,17 +134,13 @@ const DiseaseManager = () => {
                                 <button
                                     onClick={() => {
                                         setEditDiseaseId(disease.disease_id);
-                                        setEditDiseaseName(
-                                            disease.disease_name
-                                        );
+                                        setEditDiseaseName(disease.disease_name);
                                     }}
                                 >
                                     ✏️
                                 </button>
                                 <button
-                                    onClick={() =>
-                                        handleDelete(disease.disease_id)
-                                    }
+                                    onClick={() => handleDelete(disease.disease_id)}
                                 >
                                     🗑️
                                 </button>
@@ -137,5 +152,6 @@ const DiseaseManager = () => {
         </div>
     );
 };
+
 
 export default DiseaseManager;
