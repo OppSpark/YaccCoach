@@ -80,6 +80,9 @@ function Login() {
                 <p className="login-footer">
                     아직 계정이 없으신가요? <Link to="/signup">회원가입</Link>
                 </p>
+                <p className="login-footer">
+                    로그인 없이 이용하기! <Link to="/">이용하기</Link>
+                </p>
             </div>
         </div>
     );
