@@ -85,7 +85,7 @@ const SymptomDrugInfoPage = () => {
           <div className="modal">
             <p>로그인이 되어 있지 않습니다. 로그인 페이지로 이동할까요?</p>
             <div className="modal-buttons">
-              <button className="confirm-btn" onClick={handleModalConfirm}>예</button>
+              <button className="cancel-btn" onClick={handleModalConfirm}>예</button>
               <button className="cancel-btn" onClick={handleModalCancel}>아니오</button>
             </div>
           </div>
@@ -94,11 +94,6 @@ const SymptomDrugInfoPage = () => {
 
       {!showLoginModal && (
         <>
-          <div className="example-hints">
-            <button className="confirm-btn" onClick={() => setSymptoms("머리가 아프고 열이 납니다.")}>예시1</button>
-            <button className="confirm-btn" onClick={() => setSymptoms("복통이 있고 구토 증상이 있어요.")}>예시2</button>
-          </div>
-
           <form onSubmit={handleSubmit} className="symptom-form">
             <textarea
               value={symptoms}
@@ -111,6 +106,17 @@ const SymptomDrugInfoPage = () => {
               {loading ? "약을 찾는 중..." : "진단 시작"}
             </button>
           </form>
+
+          <br></br>
+
+
+          <div className="ai-suggestion-box">
+                <h4>🤔 뭘 입력해야 할지 막막하다면, 이런 예시로 시작해보세요.</h4>
+                <div className="example-hints">
+            <button className="example-btn" onClick={() => setSymptoms("머리가 아프고 열이납니다. 근육통도 있고 설사도 조금 나는거 같아요. 인후통이나 콧물 증상은 없는거 같아요")}>💡 참고할 수 있는 예시를 준비했어요.</button>
+          </div>
+            </div>
+
 
           {error && <p className="error-message">⚠️ {error}</p>}
 

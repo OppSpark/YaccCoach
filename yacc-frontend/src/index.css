@@ -17,6 +17,7 @@ code {
 .app-wrapper {
   min-height: 100vh;
   display: flex;
+  background-color: #f0f4f8;
   flex-direction: column;
 }
 
