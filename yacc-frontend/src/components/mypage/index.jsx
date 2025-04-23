@@ -26,6 +26,10 @@ const MyPage = () => {
     if (!userId) {
         return (
             <div className="mypage-container">
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
                 <p className="error-message">로그인이 필요해요.</p>
                 <button
                     className="submit-btn"
@@ -33,6 +37,56 @@ const MyPage = () => {
                 >
                     로그인 하러 가기
                 </button>
+                <div className="info-links">
+
+                <br></br>
+                <br></br>
+                <h3>💡 추천 약 정보 사이트</h3>
+                <ul>
+                    <li>
+                        <a
+                            href="https://nedrug.mfds.go.kr"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            의약품안전나라 (식약처)
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.health.kr"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            건강보험심사평가원 의약품정보
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.pharm114.or.kr"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            대한약사회 Pharm114
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div className="tips-section">
+                <h3>📌 약 복용 꿀팁</h3>
+                <div className="tips-list">
+                    <div className="tip-card">
+                        💧 약은 반드시 물과 함께 복용하세요. (우유, 커피는 비추)
+                    </div>
+                    <div className="tip-card">
+                        ⏰ 정해진 시간에 규칙적으로 복용하는 것이 효과적입니다.
+                    </div>
+                    <div className="tip-card">
+                        ⚠️ 감기약과 알러지약은 졸릴 수 있으니 운전 전 복용 금지!
+                    </div>
+                </div>
+            </div>
             </div>
         );
     }

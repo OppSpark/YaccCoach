@@ -35,16 +35,30 @@
     ------------------------------*/
 .submit-btn,
 .selector-group button,
-.confirm-btn { /* shared primary button styles */
-  background: #007BFF;
+.example-hints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.example-btn {
+  background: linear-gradient(to right, #4f8df3, #2d7bf0);
   color: #fff;
-  padding: 14px;
-  font-size: 16px;
-  font-weight: bold;
+  padding: 10px 22px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
   border: none;
-  border-radius: 18px;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.example-btn:hover {
+  background: #1f6fe5;
+  transform: translateY(-1px);
 }
 .submit-btn:hover          { background-color: #0056b3; }
 .selector-group button      { background-color: #28a745; }

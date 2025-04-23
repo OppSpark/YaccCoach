@@ -1,20 +1,23 @@
-/* 전체 레이아웃 */
 .login-container {
-    padding: 15px;
-    max-width: 480px;
-    margin: 0 auto;
+    height: 100vh; /* 화면 전체 높이 */
+    display: flex;
+    justify-content: center; /* 수평 가운데 */
+    align-items: center;     /* 수직 가운데 */
     background-color: #f0f4f8;
     font-family: 'Apple SD Gothic Neo', sans-serif;
-}
+  }
 
 /* 카드 박스 */
 .login-card {
     background-color: #ffffff;
     padding: 2rem 1.5rem;
     border-radius: 16px;
+    margin: 1rem;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
     text-align: center;
-}
+    width: 100%;
+    max-width: 400px;
+  }
 
 /* 제목 */
 .login-card h2 {
